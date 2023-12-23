@@ -15,15 +15,27 @@ public class ParkingLot {
         }
     }
 
-    public int allotSpace(Vehicle vehicle) {
+    public boolean parkVehicle(Vehicle vehicle) {
         for (int i = 0; i < CAPACITY; i++) {
             if (parkingLots.get(i) == null) {
                 System.out.println("Vehicle parked at parking lot " + (i + 1));
                 parkingLots.set(i, vehicle);
-                return i + 1;
+                return true;
             }
         }
         System.out.println("Parking lot is full");
-        return -1;
+        return false;
+    }
+
+    public boolean unParkVehicle(Vehicle vehicle) {
+        for (int i = 0; i < CAPACITY; i++) {
+            if (vehicle == parkingLots.get(i)) {
+                System.out.println("Vehicle unparked from parking lot " + (i + 1));
+                parkingLots.set(i, null);
+                return true;
+            }
+        }
+        System.out.println("Vehicle not parked in this parking.");
+        return false;
     }
 }
