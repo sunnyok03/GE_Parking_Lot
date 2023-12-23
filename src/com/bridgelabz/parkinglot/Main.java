@@ -11,5 +11,6 @@ public class Main {
         Vehicle v2 = new Vehicle("Vehicle 2", "green", "Number 2", 4);
         parkingLot.parkVehicle(v2);
 
+        parkingLot.isFull();
     }
 }

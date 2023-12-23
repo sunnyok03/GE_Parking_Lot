@@ -3,11 +3,14 @@ package com.bridgelabz.parkinglot;
 import java.util.List;
 import java.util.ArrayList;
 
-
+/*
+Parking lot class to store status at each position of the lot
+ */
 public class ParkingLot {
     public static final int CAPACITY = 100;
     private List<Vehicle> parkingLots;
 
+    //constructor
     public ParkingLot() {
         this.parkingLots = new ArrayList<>();
         for (int i = 0; i < CAPACITY; i++) {
@@ -15,6 +18,11 @@ public class ParkingLot {
         }
     }
 
+    /*
+    @desc: given a new vehicle check if it can be parked or not
+    @params: vehicle
+    @return: boolean (status if parked or not)
+     */
     public boolean parkVehicle(Vehicle vehicle) {
         for (int i = 0; i < CAPACITY; i++) {
             if (parkingLots.get(i) == null) {
@@ -27,6 +35,11 @@ public class ParkingLot {
         return false;
     }
 
+    /*
+@desc: given a vehicle check if it was parked or not
+@params: vehicle
+@return: boolean (status if unParked or not)
+ */
     public boolean unParkVehicle(Vehicle vehicle) {
         for (int i = 0; i < CAPACITY; i++) {
             if (vehicle == parkingLots.get(i)) {
@@ -38,4 +51,22 @@ public class ParkingLot {
         System.out.println("Vehicle not parked in this parking.");
         return false;
     }
+
+    /*
+@desc:
+@params:
+@return: boolean (status if parking lot is full)
+*/
+    public boolean isFull() {
+        for (int i = 0; i < CAPACITY; i++) {
+            if (parkingLots.get(i) == null) {
+                System.out.println("All parkig lot is not full.");
+                return false;
+            }
+        }
+        System.out.println("All parking lot is full.");
+        return true;
+    }
+
+
 }
