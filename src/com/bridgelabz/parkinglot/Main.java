@@ -12,5 +12,8 @@ public class Main {
         parkingLot.parkVehicle(v2);
 
         parkingLot.isFull();
+
+        AirportSecurity airportSecurity = new AirportSecurity();
+        airportSecurity.isFull(parkingLot);
     }
 }
