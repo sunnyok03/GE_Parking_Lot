@@ -68,5 +68,21 @@ public class ParkingLot {
         return true;
     }
 
+    /*
+@desc:
+@params:
+@return: boolean (status if parking lot has space)
+*/
+    public boolean hasSpace() {
+        for (int i = 0; i < CAPACITY; i++) {
+            if (parkingLots.get(i) == null) {
+                System.out.println("Parking lot is not full.");
+                return true;
+            }
+        }
+        System.out.println("All parking lot is full.");
+        return false;
+    }
+
 
 }

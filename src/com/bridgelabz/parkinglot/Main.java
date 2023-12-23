@@ -15,5 +15,7 @@ public class Main {
 
         AirportSecurity airportSecurity = new AirportSecurity();
         airportSecurity.isFull(parkingLot);
+
+        parkingLot.hasSpace();
     }
 }
