@@ -31,6 +31,7 @@ public class ParkingLot {
             if (parkingLots.get(i) == null) {
                 System.out.println("Vehicle parked at parking lot " + (i + 1));
                 parkingLots.set(i, vehicle);
+                chargePrice();
                 parkedCount++;
                 return true;
             }
@@ -108,5 +109,12 @@ public class ParkingLot {
             }
         }
         return -1;
+    }
+
+    /*
+    @desc: charge if vehicle was parked
+     */
+    public void chargePrice(){
+        System.out.println("Inform lot owner to charge for parking...");
     }
 }
