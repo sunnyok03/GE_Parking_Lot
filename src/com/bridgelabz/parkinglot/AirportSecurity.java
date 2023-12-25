@@ -10,4 +10,6 @@ public class AirportSecurity {
         System.out.println("Parking lot is not full..");
         return false;
     }
+
+
 }

@@ -9,6 +9,7 @@ Parking lot class to store status at each position of the lot
 public class ParkingLot {
     public static final int CAPACITY = 100;
     private List<Vehicle> parkingLots;
+    public static int parkedCount;
 
     //constructor
     public ParkingLot() {
@@ -16,6 +17,7 @@ public class ParkingLot {
         for (int i = 0; i < CAPACITY; i++) {
             parkingLots.add(null);
         }
+        parkedCount = 0;
     }
 
     /*
@@ -28,6 +30,7 @@ public class ParkingLot {
             if (parkingLots.get(i) == null) {
                 System.out.println("Vehicle parked at parking lot " + (i + 1));
                 parkingLots.set(i, vehicle);
+                parkedCount++;
                 return true;
             }
         }
@@ -45,6 +48,7 @@ public class ParkingLot {
             if (vehicle == parkingLots.get(i)) {
                 System.out.println("Vehicle unparked from parking lot " + (i + 1));
                 parkingLots.set(i, null);
+                parkedCount--;
                 return true;
             }
         }
@@ -58,14 +62,13 @@ public class ParkingLot {
 @return: boolean (status if parking lot is full)
 */
     public boolean isFull() {
-        for (int i = 0; i < CAPACITY; i++) {
-            if (parkingLots.get(i) == null) {
-                System.out.println("All parkig lot is not full.");
-                return false;
-            }
+        if (parkedCount == CAPACITY) {
+            System.out.println("All parking lot is not full.");
+            return false;
+        } else {
+            System.out.println("All parking lot is full.");
+            return true;
         }
-        System.out.println("All parking lot is full.");
-        return true;
     }
 
     /*
@@ -74,15 +77,12 @@ public class ParkingLot {
 @return: boolean (status if parking lot has space)
 */
     public boolean hasSpace() {
-        for (int i = 0; i < CAPACITY; i++) {
-            if (parkingLots.get(i) == null) {
-                System.out.println("Parking lot is not full.");
-                return true;
-            }
+        if (parkedCount < CAPACITY) {
+            System.out.println("Parking lot is not full.");
+            return true;
+        } else {
+            System.out.println("All parking lot is full.");
+            return false;
         }
-        System.out.println("All parking lot is full.");
-        return false;
     }
-
-
 }
