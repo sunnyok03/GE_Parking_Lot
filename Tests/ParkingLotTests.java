@@ -19,7 +19,7 @@ public class ParkingLotTests {
     @Test
     public void parkVehicle() {
         boolean status = parkingLot.parkVehicle(v1);
-        if(ParkingLot.parkedCount < ParkingLot.CAPACITY){
+        if(parkingLot.getParkedCount() < ParkingLot.CAPACITY){
             assertTrue(status);
         }else{
             assertFalse(status);
@@ -33,6 +33,13 @@ public class ParkingLotTests {
         boolean statusV2 = parkingLot.unParkVehicle(v2); // not parked
         assertTrue(statusV1);
         assertFalse(statusV2);
+    }
+
+    @Test
+    public void getPositionOfVehicle(){
+        parkingLot.parkVehicle(v1);
+        assertEquals(1,parkingLot.getPositionOfVehicle(v1));
+        assertEquals(-1,parkingLot.getPositionOfVehicle(v2));
     }
 
 }

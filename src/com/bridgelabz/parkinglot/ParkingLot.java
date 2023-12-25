@@ -9,7 +9,8 @@ Parking lot class to store status at each position of the lot
 public class ParkingLot {
     public static final int CAPACITY = 100;
     private List<Vehicle> parkingLots;
-    public static int parkedCount;
+
+    private int parkedCount;
 
     //constructor
     public ParkingLot() {
@@ -72,10 +73,19 @@ public class ParkingLot {
     }
 
     /*
-@desc:
-@params:
-@return: boolean (status if parking lot has space)
-*/
+    @desc: get count of parked vehicle
+    @params:
+    @return: parkedCount
+     */
+    public int getParkedCount() {
+        return parkedCount;
+    }
+
+    /*
+    @desc:
+    @params:
+    @return: boolean (status if parking lot has space)
+    */
     public boolean hasSpace() {
         if (parkedCount < CAPACITY) {
             System.out.println("Parking lot is not full.");
@@ -84,5 +94,19 @@ public class ParkingLot {
             System.out.println("All parking lot is full.");
             return false;
         }
+    }
+
+    /*
+    @desc: returns position of given vehicle parked (1 based indexing)
+    @params: vehicle
+    @return: position at which vehicle is parked, -1 if vehicle is not in this parking lot
+     */
+    public int getPositionOfVehicle(Vehicle vehicle) {
+        for (int i = 0; i < CAPACITY; i++) {
+            if (parkingLots.get(i) == vehicle) {
+                return i + 1;
+            }
+        }
+        return -1;
     }
 }
