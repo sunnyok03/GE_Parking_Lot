@@ -16,7 +16,7 @@ public class ParkingLotTests {
     public void before() {
         parking = new Parking(2);
         parkingLot1 = new ParkingLot(2);
-        parkingLot2 = new ParkingLot(2);
+        parkingLot2 = new ParkingLot(1);
         parking.addLot(parkingLot1);
         parking.addLot(parkingLot2);
         v1 = new Vehicle("V1", "blue", "Number 1", 4);
@@ -75,10 +75,19 @@ public class ParkingLotTests {
     }
 
     @Test
+    public void parkToNearestFree() {
+        parking.parkToNearestFree(v1);
+        assertArrayEquals(new int[]{2, 1}, parking.parkToNearestFree(v2));
+        assertArrayEquals(new int[]{1, 2}, parking.parkToNearestFree(v3));
+        assertArrayEquals(new int[]{-1, -1}, parking.parkToNearestFree(v4));
+    }
+
+    @Test
     public void parkEvenly() {
-        parking.parkEvenly(v1);
+        assertArrayEquals(new int[]{1, 1}, parking.parkEvenly(v1));
         assertArrayEquals(new int[]{2, 1}, parking.parkEvenly(v2));
-        assertArrayEquals(new int[]{1,2},parking.parkEvenly(v3));
+        assertArrayEquals(new int[]{1, 2}, parking.parkEvenly(v3));
+        assertArrayEquals(new int[]{-1, -1}, parking.parkEvenly(v4));
     }
 
 }

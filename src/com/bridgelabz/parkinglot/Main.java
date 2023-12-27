@@ -12,8 +12,8 @@ public class Main {
         Vehicle v1 = new Vehicle("Vehicle 1", "blue", "Number 1", 4);
         Vehicle v2 = new Vehicle("Vehicle 2", "green", "Number 2", 4);
 
-        parking.parkEvenly(v1);
-        parking.parkEvenly(v2);
+        parking.parkToNearestFree(v1);
+        parking.parkToNearestFree(v2);
 //
 //        for (Vehicle vehicle : parkingLot.getVehicles()) {
 //            System.out.println(vehicle);

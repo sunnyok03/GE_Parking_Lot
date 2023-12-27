@@ -60,11 +60,11 @@ public class Parking {
     }
 
     /*
-    @desc: given the vehicle according to evenly distribution
+    @desc: park to lot having the nearest free space
     @params: vehicle
-    @return: position at which vehicle was parked
+    @return : position at which vehicle was parked
      */
-    public int[] parkEvenly(Vehicle vehicle) {
+    public int[] parkToNearestFree(Vehicle vehicle) {
         int position = 0;
         boolean hasParking = true;
         while (hasParking) {
@@ -87,12 +87,32 @@ public class Parking {
     }
 
     /*
-    @desc: park to lot having the nearest free space
+    @desc: given the vehicle according to evenly distribution
     @params: vehicle
-    @return : position at which vehicle was parked
+    @return: position at which vehicle was parked
      */
-//    public int[] parkToNearestFree(Vehicle vehicle) {
-//
-//    }
+    public int[] parkEvenly(Vehicle vehicle) {
+        int minAt = -1;
+        int parkedCount = Integer.MAX_VALUE;
+        for (int i = 0; i < parkingLotsCount; i++) {
+            int cnt = parkingLots.get(i).getParkedCount();
+            if (cnt != parkingLots.get(i).getCapacity() && cnt < parkedCount) {
+                parkedCount = cnt;
+                minAt = i;
+            }
+        }
 
+        if (minAt != -1) {
+            for (int i = 0; i < parkingLots.get(minAt).getVehicles().size(); i++) {
+                Vehicle v = parkingLots.get(minAt).getVehicles().get(i);
+                if (v == null) {
+                    parkingLots.get(minAt).parkVehicle(vehicle);
+                    System.out.println("Vehicle parked in parking lot " + (minAt + 1) + " at position " + (i + 1));
+                    return new int[]{minAt + 1, i + 1};
+                }
+            }
+        }
+        System.out.println("Complete parking is full...");
+        return new int[]{-1, -1};
+    }
 }
