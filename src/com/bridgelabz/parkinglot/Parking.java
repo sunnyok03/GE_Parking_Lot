@@ -139,8 +139,6 @@ public class Parking {
                 if (vehicleList.get(i) == null) {
                     parkingLots.get(maxSpaceAt).parkVehicle(vehicle);
                     System.out.println("Vehicle parked in parking lot " + (maxSpaceAt + 1) + " at position " + (i + 1));
-                    int[] arr = {maxSpaceAt + 1, i + 1};
-                    System.out.println(Arrays.toString(arr));
                     return new int[]{maxSpaceAt + 1, i + 1};
                 }
             }
