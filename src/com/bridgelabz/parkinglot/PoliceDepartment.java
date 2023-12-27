@@ -28,4 +28,19 @@ public class PoliceDepartment {
         }
         return res;
     }
+
+    public List<int[]> getAllVehiclesOfBrand(Parking parking,String brand){
+        List<ParkingLot> parkingLots = parking.getParkingLots();
+        List<int[]> res = new ArrayList<>();
+
+        for (int lotNo = 0; lotNo < parking.getParkingLotsCount(); lotNo++) {
+            List<Vehicle> vehicleList = parkingLots.get(lotNo).getVehicles();
+            for (int pos = 0; pos < vehicleList.size(); pos++) {
+                if (vehicleList.get(pos) != null && Objects.equals(vehicleList.get(pos).getName(), brand)) {
+                    res.add(new int[]{lotNo + 1, pos + 1});
+                }
+            }
+        }
+        return res;
+    }
 }

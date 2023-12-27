@@ -119,4 +119,16 @@ public class ParkingLotTests {
 
     }
 
+    @Test
+    public void getAllVehiclesOfBrand() {
+        parking.parkEvenly(v1);
+        parking.parkEvenly(v2);
+        parking.parkEvenly(v3);
+        parking.parkEvenly(v4);
+        List<int[]> expected = new ArrayList<>();
+        expected.add(new int[]{2, 1});
+        expected.add(new int[]{2, 2});
+        assertArrayEquals(expected.toArray(), policeDepartment.getAllVehiclesOfBrand(parking, "V1").toArray());
+    }
+
 }

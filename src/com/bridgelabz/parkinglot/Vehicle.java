@@ -25,6 +25,15 @@ public class Vehicle {
         return this.color;
     }
 
+    /*
+    @desc: get brand name
+    @params:
+    @return: String
+     */
+    public String getName(){
+        return this.name;
+    }
+
     @Override
     public String toString() {
         return "Vehicle{" +

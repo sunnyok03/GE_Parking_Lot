@@ -15,8 +15,12 @@ public class ParkingLot {
     public ParkingLot(int capacity) {
         this.capacity = capacity;
         this.vehicles = new ArrayList<>();
+        this.attendantNames = new ArrayList<>();
         for (int i = 0; i < capacity; i++) {
             vehicles.add(null);
+        }
+        for (int i = 0; i < capacity; i++) {
+            attendantNames.add(null);
         }
         parkedCount = 0;
     }
