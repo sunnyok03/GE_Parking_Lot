@@ -90,4 +90,12 @@ public class ParkingLotTests {
         assertArrayEquals(new int[]{-1, -1}, parking.parkEvenly(v4));
     }
 
+    @Test
+    public void parkLargeVehicle() {
+        assertArrayEquals(new int[]{1, 1}, parking.parkLargeVehicle(v1));
+        assertArrayEquals(new int[]{1, 2}, parking.parkLargeVehicle(v2));
+        assertArrayEquals(new int[]{2, 1}, parking.parkLargeVehicle(v3));
+        assertArrayEquals(new int[]{-1, -1}, parking.parkLargeVehicle(v4));
+    }
+
 }

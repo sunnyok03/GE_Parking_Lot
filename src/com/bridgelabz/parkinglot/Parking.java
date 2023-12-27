@@ -1,6 +1,7 @@
 package com.bridgelabz.parkinglot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Parking {
@@ -87,7 +88,8 @@ public class Parking {
     }
 
     /*
-    @desc: given the vehicle according to evenly distribution
+    @desc: find lot having minimum parked and allocate
+            first empty space from that lot to the vehicle
     @params: vehicle
     @return: position at which vehicle was parked
      */
@@ -103,9 +105,9 @@ public class Parking {
         }
 
         if (minAt != -1) {
-            for (int i = 0; i < parkingLots.get(minAt).getVehicles().size(); i++) {
-                Vehicle v = parkingLots.get(minAt).getVehicles().get(i);
-                if (v == null) {
+            List<Vehicle> vehicleList = parkingLots.get(minAt).getVehicles();
+            for (int i = 0; i < vehicleList.size(); i++) {
+                if (vehicleList.get(i) == null) {
                     parkingLots.get(minAt).parkVehicle(vehicle);
                     System.out.println("Vehicle parked in parking lot " + (minAt + 1) + " at position " + (i + 1));
                     return new int[]{minAt + 1, i + 1};
@@ -113,6 +115,37 @@ public class Parking {
             }
         }
         System.out.println("Complete parking is full...");
+        return new int[]{-1, -1};
+    }
+
+    /*
+    @desc: find lot having maximum remaining space and allocate first empty space in that lot
+    @params: vehicle
+    @return: position of the vehicle parked
+     */
+    public int[] parkLargeVehicle(Vehicle vehicle) {
+        int maxSpaceAt = -1;
+        int space = Integer.MIN_VALUE;
+        for (int i = 0; i < parkingLotsCount; i++) {
+            int remainingSpace = parkingLots.get(i).getCapacity() - parkingLots.get(i).getParkedCount();
+            if (space < remainingSpace) {
+                space = remainingSpace;
+                maxSpaceAt = i;
+            }
+        }
+        if (maxSpaceAt != -1) {
+            List<Vehicle> vehicleList = parkingLots.get(maxSpaceAt).getVehicles();
+            for (int i = 0; i < vehicleList.size(); i++) {
+                if (vehicleList.get(i) == null) {
+                    parkingLots.get(maxSpaceAt).parkVehicle(vehicle);
+                    System.out.println("Vehicle parked in parking lot " + (maxSpaceAt + 1) + " at position " + (i + 1));
+                    int[] arr = {maxSpaceAt + 1, i + 1};
+                    System.out.println(Arrays.toString(arr));
+                    return new int[]{maxSpaceAt + 1, i + 1};
+                }
+            }
+        }
+
         return new int[]{-1, -1};
     }
 }
