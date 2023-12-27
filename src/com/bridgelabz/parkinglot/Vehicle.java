@@ -17,5 +17,11 @@ public class Vehicle {
         this.capacity = capacity;
     }
 
-
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "name='" + name + '\'' +
+                ", number='" + number + '\'' +
+                '}';
+    }
 }

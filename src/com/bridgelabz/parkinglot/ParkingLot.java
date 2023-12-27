@@ -7,16 +7,16 @@ import java.util.ArrayList;
 Parking lot class to store status at each position of the lot
  */
 public class ParkingLot {
-    public static final int CAPACITY = 100;
-    private List<Vehicle> parkingLots;
-
+    private final List<Vehicle> vehicles;
+    private final int capacity;
     private int parkedCount;
 
     //constructor
-    public ParkingLot() {
-        this.parkingLots = new ArrayList<>();
-        for (int i = 0; i < CAPACITY; i++) {
-            parkingLots.add(null);
+    public ParkingLot(int capacity) {
+        this.capacity = capacity;
+        this.vehicles = new ArrayList<>();
+        for (int i = 0; i < capacity; i++) {
+            vehicles.add(null);
         }
         parkedCount = 0;
     }
@@ -27,11 +27,11 @@ public class ParkingLot {
     @return: boolean (status if parked or not)
      */
     public boolean parkVehicle(Vehicle vehicle) {
-        for (int i = 0; i < CAPACITY; i++) {
-            if (parkingLots.get(i) == null) {
-                System.out.println("Vehicle parked at parking lot " + (i + 1));
-                parkingLots.set(i, vehicle);
-                chargePrice();
+        for (int i = 0; i < capacity; i++) {
+            if (vehicles.get(i) == null) {
+                System.out.println("Vehicle parked at position " + (i + 1));
+                vehicles.set(i, vehicle);
+                chargePrice(); // inform lot owner to charge for parking
                 parkedCount++;
                 return true;
             }
@@ -46,15 +46,15 @@ public class ParkingLot {
 @return: boolean (status if unParked or not)
  */
     public boolean unParkVehicle(Vehicle vehicle) {
-        for (int i = 0; i < CAPACITY; i++) {
-            if (vehicle == parkingLots.get(i)) {
-                System.out.println("Vehicle unparked from parking lot " + (i + 1));
-                parkingLots.set(i, null);
+        for (int i = 0; i < capacity; i++) {
+            if (vehicle == vehicles.get(i)) {
+                System.out.println("Vehicle unParked from position " + (i + 1));
+                vehicles.set(i, null);
                 parkedCount--;
                 return true;
             }
         }
-        System.out.println("Vehicle not parked in this parking.");
+        System.out.println("Vehicle not parked in this parking lot.");
         return false;
     }
 
@@ -64,11 +64,11 @@ public class ParkingLot {
 @return: boolean (status if parking lot is full)
 */
     public boolean isFull() {
-        if (parkedCount == CAPACITY) {
-            System.out.println("All parking lot is not full.");
+        if (parkedCount != capacity) {
+            System.out.println("Current parking lot is not full.");
             return false;
         } else {
-            System.out.println("All parking lot is full.");
+            System.out.println("Current parking lot is full.");
             return true;
         }
     }
@@ -88,33 +88,30 @@ public class ParkingLot {
     @return: boolean (status if parking lot has space)
     */
     public boolean hasSpace() {
-        if (parkedCount < CAPACITY) {
-            System.out.println("Parking lot is not full.");
+        if (parkedCount < capacity) {
+            System.out.println("Current parking lot is not full.");
             return true;
         } else {
-            System.out.println("All parking lot is full.");
+            System.out.println("Current parking lot is full.");
             return false;
         }
     }
 
     /*
-    @desc: returns position of given vehicle parked (1 based indexing)
-    @params: vehicle
-    @return: position at which vehicle is parked, -1 if vehicle is not in this parking lot
+    @desc: charge if vehicle was parked
      */
-    public int getPositionOfVehicle(Vehicle vehicle) {
-        for (int i = 0; i < CAPACITY; i++) {
-            if (parkingLots.get(i) == vehicle) {
-                return i + 1;
-            }
-        }
-        return -1;
+    public void chargePrice() {
+        System.out.println("Inform lot owner to charge for parking...");
     }
 
     /*
-    @desc: charge if vehicle was parked
+    @desc: return capacity of current lot
      */
-    public void chargePrice(){
-        System.out.println("Inform lot owner to charge for parking...");
+    public int getCapacity() {
+        return this.capacity;
+    }
+
+    public List<Vehicle> getVehicles() {
+        return this.vehicles;
     }
 }
