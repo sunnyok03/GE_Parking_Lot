@@ -16,6 +16,14 @@ public class Vehicle {
         this.number = number;
         this.capacity = capacity;
     }
+    /*
+    @desc: returns color of current car
+    @params:
+    @return String (color)
+     */
+    public String getColor(){
+        return this.color;
+    }
 
     @Override
     public String toString() {

@@ -19,6 +19,10 @@ public class Parking {
         }
     }
 
+    public int getParkingLotsCount() {
+        return this.parkingLotsCount;
+    }
+
     /*
     @desc: add the newly constructed parking lot to current parking
     @params: parkingLot to be added

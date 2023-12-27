@@ -1,14 +1,21 @@
 import com.bridgelabz.parkinglot.Parking;
 import com.bridgelabz.parkinglot.ParkingLot;
+import com.bridgelabz.parkinglot.PoliceDepartment;
 import com.bridgelabz.parkinglot.Vehicle;
+
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import static org.junit.Assert.*;
 
 public class ParkingLotTests {
 
     public Parking parking;
+    public PoliceDepartment policeDepartment;
     public ParkingLot parkingLot1, parkingLot2;
     public Vehicle v1, v2, v3, v4;
 
@@ -17,6 +24,7 @@ public class ParkingLotTests {
         parking = new Parking(2);
         parkingLot1 = new ParkingLot(2);
         parkingLot2 = new ParkingLot(1);
+        policeDepartment = new PoliceDepartment();
         parking.addLot(parkingLot1);
         parking.addLot(parkingLot2);
         v1 = new Vehicle("V1", "blue", "Number 1", 4);
@@ -96,6 +104,19 @@ public class ParkingLotTests {
         assertArrayEquals(new int[]{1, 2}, parking.parkLargeVehicle(v2));
         assertArrayEquals(new int[]{2, 1}, parking.parkLargeVehicle(v3));
         assertArrayEquals(new int[]{-1, -1}, parking.parkLargeVehicle(v4));
+    }
+
+    @Test
+    public void getAllVehiclesOfColor() {
+        parking.parkEvenly(v1);
+        parking.parkEvenly(v2);
+        parking.parkEvenly(v3);
+        parking.parkEvenly(v4);
+        List<int[]> expected = new ArrayList<>();
+        expected.add(new int[]{2, 1});
+        expected.add(new int[]{2, 2});
+        assertArrayEquals(expected.toArray(), policeDepartment.getAllVehiclesOfColor(parking, "green").toArray());
+
     }
 
 }
