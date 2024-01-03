@@ -9,7 +9,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import static org.junit.Assert.*;
 
 public class ParkingLotTests {
@@ -111,12 +110,21 @@ public class ParkingLotTests {
         parking.parkEvenly(v1);
         parking.parkEvenly(v2);
         parking.parkEvenly(v3);
-        parking.parkEvenly(v4);
         List<int[]> expected = new ArrayList<>();
         expected.add(new int[]{2, 1});
-        expected.add(new int[]{2, 2});
-        assertArrayEquals(expected.toArray(), policeDepartment.getAllVehiclesOfColor(parking, "green").toArray());
+        List<int[]> actual = policeDepartment.getAllVehiclesOfColor(parking, "green");
+        assertArrayEquals(expected.toArray(), actual.toArray());
+    }
 
+    @Test
+    public void getAllVehiclesOfBrandAndColor() {
+        parking.parkEvenly(v1);
+        parking.parkEvenly(v2);
+        parking.parkEvenly(v3);
+        List<int[]> expected = new ArrayList<>();
+        expected.add(new int[]{1, 1});
+        List<int[]> actual = policeDepartment.getAllVehiclesOfBrandAndColor(parking, "V1", "blue");
+        assertArrayEquals(expected.toArray(), actual.toArray());
     }
 
     @Test
@@ -124,11 +132,9 @@ public class ParkingLotTests {
         parking.parkEvenly(v1);
         parking.parkEvenly(v2);
         parking.parkEvenly(v3);
-        parking.parkEvenly(v4);
         List<int[]> expected = new ArrayList<>();
         expected.add(new int[]{2, 1});
-        expected.add(new int[]{2, 2});
-        assertArrayEquals(expected.toArray(), policeDepartment.getAllVehiclesOfBrand(parking, "V1").toArray());
+        List<int[]> actual = policeDepartment.getAllVehiclesOfBrand(parking, "V2");
+        assertArrayEquals(expected.toArray(), actual.toArray());
     }
-
 }

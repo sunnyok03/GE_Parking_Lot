@@ -21,7 +21,7 @@ public class Main {
         parkingLot.parkVehicle(v1);
         parkingLot2.parkVehicle(v3);
 
-        List<int[]> res = policeDepartment.getAllVehiclesOfColor(parking, "green");
+        List<int[]> res = policeDepartment.getAllVehiclesOfBrandAndColor(parking, "Vehicle 1", "blue");
         System.out.println("Location of all the green colored vehicle in {parking lot, position}: ");
         for (int[] single : res) {
             System.out.println(Arrays.toString(single));

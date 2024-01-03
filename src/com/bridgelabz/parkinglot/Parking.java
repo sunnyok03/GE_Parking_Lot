@@ -1,9 +1,11 @@
 package com.bridgelabz.parkinglot;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+/*
+@desc: parking class to store all the parking lots and apply operations on them
+ */
 public class Parking {
     private final List<ParkingLot> parkingLots;
     private final int parkingLotsCount;
@@ -19,6 +21,11 @@ public class Parking {
         }
     }
 
+    /*
+      @desc: return count of parking lots
+      @params:
+      @return: int
+       */
     public int getParkingLotsCount() {
         return this.parkingLotsCount;
     }
@@ -40,6 +47,11 @@ public class Parking {
         return false;
     }
 
+    /*
+    @desc: return list of parking lots
+    @params:
+    @return: parkingLots
+     */
     public List<ParkingLot> getParkingLots() {
         return this.parkingLots;
     }
