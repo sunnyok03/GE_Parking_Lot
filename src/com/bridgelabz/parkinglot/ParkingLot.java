@@ -1,13 +1,18 @@
 package com.bridgelabz.parkinglot;
 
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
 
 /*
 Parking lot class to store status at each position of the lot
  */
 public class ParkingLot {
     private final List<Vehicle> vehicles;
+    private final Map<Vehicle, LocalDateTime> parkingTime;
+
     private final int capacity;
     private int parkedCount;
 
@@ -18,6 +23,7 @@ public class ParkingLot {
         for (int i = 0; i < capacity; i++) {
             vehicles.add(null);
         }
+        parkingTime = new HashMap<>();
         parkedCount = 0;
     }
 
@@ -31,6 +37,7 @@ public class ParkingLot {
             if (vehicles.get(i) == null) {
                 System.out.println("Vehicle parked at position " + (i + 1));
                 vehicles.set(i, vehicle);
+                setParkingTime(vehicle, LocalDateTime.now());
                 chargePrice(); // inform lot owner to charge for parking
                 parkedCount++;
                 return true;
@@ -50,6 +57,7 @@ public class ParkingLot {
             if (vehicle == vehicles.get(i)) {
                 System.out.println("Vehicle unParked from position " + (i + 1));
                 vehicles.set(i, null);
+                unsetParkingTime(vehicle);
                 parkedCount--;
                 return true;
             }
@@ -113,5 +121,27 @@ public class ParkingLot {
 
     public List<Vehicle> getVehicles() {
         return this.vehicles;
+    }
+
+    /*
+    @desc: store the parking time at which the vehicle parked
+    @params: vehicle, time
+    @return:
+     */
+    public void setParkingTime(Vehicle vehicle, LocalDateTime time) {
+        parkingTime.put(vehicle, time);
+    }
+
+    /*
+       @desc: store the parking time at which the vehicle parked
+       @params: vehicle, time
+       @return:
+        */
+    public void unsetParkingTime(Vehicle vehicle) {
+        parkingTime.remove(vehicle);
+    }
+
+    public LocalDateTime getParkingTime(Vehicle vehicle) {
+        return parkingTime.get(vehicle);
     }
 }

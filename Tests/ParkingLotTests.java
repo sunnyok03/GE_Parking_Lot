@@ -137,4 +137,19 @@ public class ParkingLotTests {
         List<int[]> actual = policeDepartment.getAllVehiclesOfBrand(parking, "V2");
         assertArrayEquals(expected.toArray(), actual.toArray());
     }
+
+    @Test
+    public void getRecentParkedVehicles() {
+        parking.parkEvenly(v1);
+        parking.parkEvenly(v2);
+        parking.parkEvenly(v3);
+        List<int[]> expected = new ArrayList<>();
+        expected.add(new int[]{1, 1});
+        expected.add(new int[]{1, 2});
+        expected.add(new int[]{2, 1});
+        List<int[]> actual = policeDepartment.getRecentParkedVehicles(parking, 20);
+        assertArrayEquals(expected.toArray(),actual.toArray());
+    }
+
+    
 }

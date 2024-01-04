@@ -1,7 +1,10 @@
 package com.bridgelabz.parkinglot;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /*
 @desc: parking class to store all the parking lots and apply operations on them

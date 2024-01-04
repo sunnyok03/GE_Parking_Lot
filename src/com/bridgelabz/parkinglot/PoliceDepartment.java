@@ -1,5 +1,8 @@
 package com.bridgelabz.parkinglot;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -61,6 +64,28 @@ public class PoliceDepartment {
             List<Vehicle> vehicleList = parkingLots.get(lotNo).getVehicles();
             for (int pos = 0; pos < vehicleList.size(); pos++) {
                 if (vehicleList.get(pos) != null && Objects.equals(vehicleList.get(pos).getName(), brand) && Objects.equals(vehicleList.get(pos).getColor(), color)) {
+                    res.add(new int[]{lotNo + 1, pos + 1});
+                }
+            }
+        }
+        return res;
+    }
+
+    /*
+    @desc: get all the vehicles location parked in last minutess
+    @params: parking, time in localDateTime
+    return: list of positions of vehicles
+     */
+    public List<int[]> getRecentParkedVehicles(Parking parking, int minutes) {
+        LocalDateTime time = LocalDateTime.now().minusMinutes(minutes); // we need all vehicles parked after this time
+        List<ParkingLot> parkingLots = parking.getParkingLots();
+        List<int[]> res = new ArrayList<>();
+
+        for (int lotNo = 0; lotNo < parking.getParkingLotsCount(); lotNo++) {
+            List<Vehicle> vehicleList = parkingLots.get(lotNo).getVehicles();
+            for (int pos = 0; pos < vehicleList.size(); pos++) {
+                LocalDateTime parkingTime = parkingLots.get(lotNo).getParkingTime(vehicleList.get(pos));
+                if (vehicleList.get(pos) != null && time.isBefore(parkingTime)) {
                     res.add(new int[]{lotNo + 1, pos + 1});
                 }
             }
